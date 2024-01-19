@@ -7,8 +7,8 @@ const styles = {
 
 const Home = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center bg-gray-700">
-      <h1 className="text-lg mt-16">
+    <div className="min-h-screen w-full flex flex-col items-center bg-gray-700 text-center p-3">
+      <h1 className="text-2xl mt-16">
         Click one to explore various web components animation
       </h1>
       <ul className="m-5 flex flex-col gap-3">
