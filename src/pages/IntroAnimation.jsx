@@ -10,23 +10,6 @@ const IntroAnimation = () => {
   const comp = useRef();
   const [introLoaded, setIntroLoaded] = useState(false);
 
-  useEffect(() => {
-    let hashPresent = window.location.hash;
-    // checks if hash is present
-    let hashPresentDiv = hashPresent && document.querySelector(hashPresent);
-    hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
-
-    const hashChange = () => {
-      hashPresent = window.location.hash;
-      hashPresentDiv = hashPresent && document.querySelector(hashPresent);
-      // scrolls to hash postion if hash is valid
-      hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
-    };
-    window.addEventListener("hashchange", hashChange);
-
-    return () => window.removeEventListener("hashchange", hashChange);
-  }, [introLoaded]);
-
   useGSAP(
     () => {
       const tl = gsap.timeline({ onComplete: () => setIntroLoaded(true) });
@@ -81,11 +64,25 @@ const IntroAnimation = () => {
       });
     });
 
-    // const storedScrollPosition = localStorage.getItem("scrollPosition");
+    let hashPresent = window.location.hash;
+    // checks if hash is present
+    let hashPresentDiv = hashPresent && document.querySelector(hashPresent);
+    hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
 
-    // if (storedScrollPosition && !hashPresentDiv) {
-    //   window.scrollTo(window, parseInt(storedScrollPosition));
-    // }
+    const hashChange = () => {
+      hashPresent = window.location.hash;
+      hashPresentDiv = hashPresent && document.querySelector(hashPresent);
+      // scrolls to hash postion if hash is valid
+      hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
+    };
+    window.addEventListener("hashchange", hashChange);
+
+    const storedScrollPosition = localStorage.getItem("scrollPosition");
+
+    if (storedScrollPosition && !hashPresentDiv) {
+      window.scrollTo(window, parseInt(storedScrollPosition));
+    }
+    return () => window.removeEventListener("hashchange", hashChange);
   }, [introLoaded]);
 
   return (
@@ -94,10 +91,10 @@ const IntroAnimation = () => {
         id="intro-slider"
         className="h-screen p-10 bg-gray-50 absolute top-0 left-0 w-full z-10 flex flex-col gap-10 tracking-tight font-spaceGrotesk"
       >
-        <h1 className="text-4xl">Software Engineer</h1>
-        <h1 className="text-4xl">HardWare Dev</h1>
-        <h1 className="text-4xl">Designer</h1>
-        <h1 className="text-4xl">Avid Reader</h1>
+        <h1 className="text-4xl">lorem ipsum </h1>
+        <h1 className="text-4xl">dolor </h1>
+        <h1 className="text-4xl">sit amet</h1>
+        <h1 className="text-4xl">consectetur</h1>
       </div>
       <div className="h-screen flex justify-center place-items-center bg-gray-700 text-white">
         <h1 id="welcome" className="text-9xl font-bold font-spaceGrotesk">
