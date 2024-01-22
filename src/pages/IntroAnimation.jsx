@@ -42,33 +42,33 @@ const IntroAnimation = () => {
           y: "+=30",
           duration: 0.3,
         });
-    },
+      const splitType = document.querySelectorAll(".reveal-text");
 
+      splitType.forEach((char) => {
+        const text = new SplitType(char, { types: "chars" });
+        gsap.from(text.chars, {
+          opacity: 0.3,
+          stagger: 0.5,
+          scrollTrigger: {
+            trigger: char,
+            start: "top 80%",
+            end: "top 20%",
+            scrub: true,
+          },
+        });
+      });
+    },
     { scope: comp }
   );
 
-  useGSAP(() => {
-    const splitType = document.querySelectorAll(".reveal-text");
-
-    splitType.forEach((char) => {
-      const text = new SplitType(char, { types: "chars" });
-      gsap.from(text.chars, {
-        opacity: 0.3,
-        stagger: 0.5,
-        scrollTrigger: {
-          trigger: char,
-          start: "top 80%",
-          end: "top 20%",
-          scrub: true,
-        },
-      });
-    });
-
+  useEffect(() => {
     let hashPresent = window.location.hash;
     // checks if hash is present
     let hashPresentDiv = hashPresent && document.querySelector(hashPresent);
     // scrolls to valid hash position on load
-    hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
+    if (hashPresentDiv && introLoaded) {
+      window.scrollTo(0, hashPresentDiv.offsetTop);
+    }
 
     const hashChange = () => {
       hashPresent = window.location.hash;
@@ -76,16 +76,9 @@ const IntroAnimation = () => {
       // ensures the current valid hash postion is in view
       hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
     };
+
     window.addEventListener("hashchange", hashChange);
 
-    // Re-consider this code block
-    {
-      const storedScrollPosition = localStorage.getItem("scrollPosition");
-
-      if (storedScrollPosition && !hashPresentDiv) {
-        window.scrollTo(window, parseInt(storedScrollPosition));
-      }
-    }
     return () => window.removeEventListener("hashchange", hashChange);
   }, [introLoaded]);
 
@@ -93,7 +86,7 @@ const IntroAnimation = () => {
     <div ref={comp} className="relative">
       <div
         id="intro-slider"
-        className="h-screen p-10 bg-gray-50 absolute top-0 left-0 w-full z-10 flex flex-col gap-10 tracking-tight font-spaceGrotesk"
+        className="h-screen p-10 bg-gray-50 fixed top-0 left-0 w-full z-10 flex flex-col gap-10 tracking-tight font-spaceGrotesk"
       >
         <h1 className="text-4xl">lorem ipsum </h1>
         <h1 className="text-4xl">dolor </h1>
@@ -105,32 +98,30 @@ const IntroAnimation = () => {
           Welcome
         </h1>
       </div>
-      {introLoaded && (
-        <>
-          <div
-            id="section1"
-            className="h-screen flex place-items-center p-5  bg-red-300 text-white"
-          >
-            <h1 className="reveal-text text-5xl">
-              Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Dolorum, molestiae.
-            </h1>
-          </div>
-          <div
-            id="section2"
-            className="h-screen flex place-items-center p-5  bg-yellow-300"
-          >
-            <h1 className="reveal-text text-5xl">
-              Here goes some text. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Ipsam, modi.
-            </h1>
-          </div>
-          <div
-            id="section3"
-            className="h-screen flex place-items-center p-5  bg-blue-300 text-white"
-          ></div>
-        </>
-      )}
+      <>
+        <div
+          id="section1"
+          className="h-screen flex place-items-center p-5  bg-red-300 text-white"
+        >
+          <h1 className="reveal-text text-5xl">
+            Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet consectetur
+            adipisicing elit. Dolorum, molestiae.
+          </h1>
+        </div>
+        <div
+          id="section2"
+          className="h-screen flex place-items-center p-5  bg-yellow-300"
+        >
+          <h1 className="reveal-text text-5xl">
+            Here goes some text. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Ipsam, modi.
+          </h1>
+        </div>
+        <div
+          id="section3"
+          className="h-screen flex place-items-center p-5  bg-blue-300 text-white"
+        ></div>
+      </>
     </div>
   );
 };
