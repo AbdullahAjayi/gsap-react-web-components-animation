@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +9,23 @@ gsap.registerPlugin(ScrollTrigger);
 const IntroAnimation = () => {
   const comp = useRef();
   const [introLoaded, setIntroLoaded] = useState(false);
+
+  useEffect(() => {
+    let hashPresent = window.location.hash;
+    // checks if hash is present
+    let hashPresentDiv = hashPresent && document.querySelector(hashPresent);
+    hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
+
+    const hashChange = () => {
+      hashPresent = window.location.hash;
+      hashPresentDiv = hashPresent && document.querySelector(hashPresent);
+      // scrolls to hash postion if hash is valid
+      hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
+    };
+    window.addEventListener("hashchange", hashChange);
+
+    return () => window.removeEventListener("hashchange", hashChange);
+  }, [introLoaded]);
 
   useGSAP(
     () => {
@@ -64,27 +81,11 @@ const IntroAnimation = () => {
       });
     });
 
-    const hashPresent = window.location.hash
-      ? document.querySelector(`${window.location.hash}`)
-      : null;
+    // const storedScrollPosition = localStorage.getItem("scrollPosition");
 
-    hashPresent && window.scrollTo(0, hashPresent.offsetTop);
-
-    const storedScrollPosition = localStorage.getItem("scrollPosition");
-
-    if (storedScrollPosition && !hashPresent) {
-      window.scrollTo(window, parseInt(storedScrollPosition));
-    }
-
-    const hashChange = () => {
-      console.log("hash has changed");
-      if (hashPresent) {
-        window.scrollTo(0, hashPresent.offsetTop);
-      }
-    };
-
-    window.addEventListener("hashchange", () => hashChange);
-    // window.removeEventListener("hashchange", hashChange);
+    // if (storedScrollPosition && !hashPresentDiv) {
+    //   window.scrollTo(window, parseInt(storedScrollPosition));
+    // }
   }, [introLoaded]);
 
   return (
@@ -107,7 +108,7 @@ const IntroAnimation = () => {
         <>
           <div
             id="section1"
-            className="h-screen flex place-items-center p-5  bg-blue-300 text-white"
+            className="h-screen flex place-items-center p-5  bg-red-300 text-white"
           >
             <h1 className="reveal-text text-5xl">
               Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet
