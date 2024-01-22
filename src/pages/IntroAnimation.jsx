@@ -13,16 +13,11 @@ const IntroAnimation = () => {
   useGSAP(
     () => {
       const tl = gsap.timeline({ onComplete: () => setIntroLoaded(true) });
-      tl.from("#intro-slider", {
-        xPercent: -100,
-        duration: 1.3,
-        delay: 0.2,
+      tl.from("#intro-slider > h1", {
+        opacity: 0,
+        x: "+=30",
+        stagger: 0.5,
       })
-        .from("#intro-slider > h1", {
-          opacity: 0,
-          x: "+=30",
-          stagger: 0.5,
-        })
         .to("#intro-slider > h1", {
           opacity: 0,
           x: "-=30",
@@ -76,6 +71,9 @@ const IntroAnimation = () => {
       // ensures the current valid hash postion is in view
       hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
     };
+
+    if (!introLoaded) document.documentElement.style.overflowY = "hidden";
+    else document.documentElement.style.overflowY = "scroll";
 
     window.addEventListener("hashchange", hashChange);
 
