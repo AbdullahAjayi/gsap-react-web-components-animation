@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 
@@ -25,6 +26,16 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 const App = () => {
+  useEffect(() => {
+    const getScrollPosition = () => {
+      localStorage.setItem("scrollPosition", window.scrollY);
+    };
+
+    window.addEventListener("scroll", getScrollPosition);
+
+    return () => window.removeEventListener("scroll", getScrollPosition);
+  }, []);
+
   return (
     <main className="font-spaceGrotesk">
       <RouterProvider router={router} />{" "}

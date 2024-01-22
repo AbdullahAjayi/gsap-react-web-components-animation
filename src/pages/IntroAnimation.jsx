@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -43,6 +43,7 @@ const IntroAnimation = () => {
           duration: 0.3,
         });
     },
+
     { scope: comp }
   );
 
@@ -52,9 +53,8 @@ const IntroAnimation = () => {
     splitType.forEach((char) => {
       const text = new SplitType(char, { types: "chars" });
       gsap.from(text.chars, {
-        opacity: 0,
-        stagger: 0.3,
-        y: -15,
+        opacity: 0.3,
+        stagger: 0.5,
         scrollTrigger: {
           trigger: char,
           start: "top 80%",
@@ -63,6 +63,28 @@ const IntroAnimation = () => {
         },
       });
     });
+
+    const hashPresent = window.location.hash
+      ? document.querySelector(`${window.location.hash}`)
+      : null;
+
+    hashPresent && window.scrollTo(0, hashPresent.offsetTop);
+
+    const storedScrollPosition = localStorage.getItem("scrollPosition");
+
+    if (storedScrollPosition && !hashPresent) {
+      window.scrollTo(window, parseInt(storedScrollPosition));
+    }
+
+    const hashChange = () => {
+      console.log("hash has changed");
+      if (hashPresent) {
+        window.scrollTo(0, hashPresent.offsetTop);
+      }
+    };
+
+    window.addEventListener("hashchange", () => hashChange);
+    // window.removeEventListener("hashchange", hashChange);
   }, [introLoaded]);
 
   return (
@@ -83,19 +105,28 @@ const IntroAnimation = () => {
       </div>
       {introLoaded && (
         <>
-          <div className="h-screen flex place-items-center p-5  bg-blue-300 text-white">
+          <div
+            id="section1"
+            className="h-screen flex place-items-center p-5  bg-blue-300 text-white"
+          >
             <h1 className="reveal-text text-5xl">
               Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet
               consectetur adipisicing elit. Dolorum, molestiae.
             </h1>
           </div>
-          <div className="h-screen flex place-items-center p-5  bg-yellow-300">
+          <div
+            id="section2"
+            className="h-screen flex place-items-center p-5  bg-yellow-300"
+          >
             <h1 className="reveal-text text-5xl">
               Here goes some text. Lorem ipsum dolor sit amet consectetur
               adipisicing elit. Ipsam, modi.
             </h1>
           </div>
-          <div className="h-screen flex place-items-center p-5  bg-blue-300 text-white"></div>
+          <div
+            id="section3"
+            className="h-screen flex place-items-center p-5  bg-blue-300 text-white"
+          ></div>
         </>
       )}
     </div>
