@@ -67,20 +67,24 @@ const IntroAnimation = () => {
     let hashPresent = window.location.hash;
     // checks if hash is present
     let hashPresentDiv = hashPresent && document.querySelector(hashPresent);
+    // scrolls to valid hash position on load
     hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
 
     const hashChange = () => {
       hashPresent = window.location.hash;
       hashPresentDiv = hashPresent && document.querySelector(hashPresent);
-      // scrolls to hash postion if hash is valid
+      // ensures the current valid hash postion is in view
       hashPresentDiv && window.scrollTo(0, hashPresentDiv.offsetTop);
     };
     window.addEventListener("hashchange", hashChange);
 
-    const storedScrollPosition = localStorage.getItem("scrollPosition");
+    // Re-consider this code block
+    {
+      const storedScrollPosition = localStorage.getItem("scrollPosition");
 
-    if (storedScrollPosition && !hashPresentDiv) {
-      window.scrollTo(window, parseInt(storedScrollPosition));
+      if (storedScrollPosition && !hashPresentDiv) {
+        window.scrollTo(window, parseInt(storedScrollPosition));
+      }
     }
     return () => window.removeEventListener("hashchange", hashChange);
   }, [introLoaded]);
