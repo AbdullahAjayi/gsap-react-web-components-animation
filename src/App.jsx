@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 
-import { Home, IntroAnimation } from "./pages";
+import { GalleryWebsite, Home, IntroAnimation } from "./pages";
 import Cursor from "./components/Cursor";
 
 const router = createBrowserRouter([
@@ -10,6 +10,10 @@ const router = createBrowserRouter([
   {
     path: "/intro-animation",
     element: <IntroAnimation />,
+  },
+  {
+    path: "/gallery-website",
+    element: <GalleryWebsite />,
   },
 ]);
 

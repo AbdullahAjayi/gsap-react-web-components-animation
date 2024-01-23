@@ -16,7 +16,7 @@ const Home = () => {
           <Link to="/intro-animation">Intro Animation</Link>
         </li>
         <li className={styles.linkBtn}>
-          <Link to="./">Animation 2</Link>
+          <Link to="/gallery-website">Gallery Website</Link>
         </li>
         <li className={styles.linkBtn}>
           <Link to="./">Animation 3</Link>
