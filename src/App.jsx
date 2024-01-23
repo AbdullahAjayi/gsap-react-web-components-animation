@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 
 import { Home, IntroAnimation } from "./pages";
+import Cursor from "./components/Cursor";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -38,7 +39,8 @@ const App = () => {
 
   return (
     <main className="font-spaceGrotesk">
-      <RouterProvider router={router} />{" "}
+      <Cursor />
+      <RouterProvider router={router} />
     </main>
   );
 };
