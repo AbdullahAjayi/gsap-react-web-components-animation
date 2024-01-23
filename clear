@@ -1,0 +1,70 @@
+[1mdiff --git a/src/pages/GalleryWebsite.jsx b/src/pages/GalleryWebsite.jsx[m
+[1mindex 710b3c5..606a4d5 100644[m
+[1m--- a/src/pages/GalleryWebsite.jsx[m
+[1m+++ b/src/pages/GalleryWebsite.jsx[m
+[36m@@ -1,20 +1,48 @@[m
+[31m-import Jet2 from "../assets/svgs/Jet2.svg";[m
+[32m+[m[32mimport { useRef } from "react";[m
+[32m+[m[32mimport gsap from "gsap";[m
+[32m+[m[32mimport { useGSAP } from "@gsap/react";[m
+[32m+[m[32mimport { ScrollTrigger } from "gsap/ScrollTrigger";[m
+ [m
+[32m+[m[32mimport Jet2 from "../assets/svgs/Jet2.svg";[m
+ import { sections, JetSvgs } from "../data/data";[m
+ [m
+[32m+[m[32mgsap.registerPlugin(ScrollTrigger);[m
+[32m+[m
+ const GalleryWebsite = () => {[m
+[32m+[m[32m  const slider = useRef();[m
+[32m+[m
+[32m+[m[32m  useGSAP(() => {[m
+[32m+[m[32m    const sectionDivs = gsap.utils.toArray(".section");[m
+[32m+[m
+[32m+[m[32m    const tl = gsap.timeline({[m
+[32m+[m[32m      defaults: { ease: "none" },[m
+[32m+[m[32m      scrollTrigger: {[m
+[32m+[m[32m        trigger: slider.current,[m
+[32m+[m[32m        pin: true,[m
+[32m+[m[32m        scrub: 2,[m
+[32m+[m[32m        snap: 1 / (sections.length - 1),[m
+[32m+[m[32m        end: () => "+=" + slider.current.offsetWidth,[m
+[32m+[m[32m      },[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    tl.to(sectionDivs, {[m
+[32m+[m[32m      xPercent: -100 * (sections.length - 1),[m
+[32m+[m[32m    });[m
+[32m+[m[32m  });[m
+[32m+[m
+   return ([m
+     <div className="min-h-screen bg-slate-400">[m
+       <div className="outer overflow-x-hidden">[m
+         <div[m
+[32m+[m[32m          ref={slider}[m
+           style={{[m
+[32m+[m[32m            display: "flex",[m
+             width: `${sections.length * 100}vw`,[m
+           }}[m
+[31m-          className={`slider flex`}[m
+         >[m
+           {sections.map((section, key) => {[m
+             return ([m
+[31m-              <section key={key} className="w-[100%] h-screen">[m
+[32m+[m[32m              <section key={key} className="section w-[100%] h-screen">[m
+                 <div className="inner relative w-full h-full">[m
+                   <img src={section.image} alt="" className="w-full h-full" />[m
+                   <div className="content absolute right-6 bottom-6 text-white w-1/4">[m
+[36m@@ -32,12 +60,12 @@[m [mconst GalleryWebsite = () => {[m
+         <img[m
+           key={i}[m
+           src={Jet2}[m
+[32m+[m[32m          className={`w-12 fixed opacity-50`}[m
+           style={{[m
+             transform: `scale(${svg.scale})`,[m
+             top: `${svg.top}%`,[m
+             left: `${svg.left}%`,[m
+           }}[m
+[31m-          className={`w-12 absolute opacity-50`}[m
+           alt=""[m
+         />[m
+       ))}[m
