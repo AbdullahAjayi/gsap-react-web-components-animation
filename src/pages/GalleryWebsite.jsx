@@ -60,7 +60,6 @@ const GalleryWebsite = () => {
       const jets = gsap.utils.toArray(".jet");
 
       jets.forEach((jet, i) => {
-        console.log(jet.dataset.distance);
         gsap.to(jet, {
           xPercent: jet.dataset.distance,
           scrollTrigger: {
@@ -104,7 +103,7 @@ const GalleryWebsite = () => {
         <img
           key={i}
           src={Jet2}
-          className={`jet w-12 fixed opacity-50`}
+          className={`jet w-12 fixed opacity-20`}
           style={{
             transform: `scale(${svg.scale})`,
             top: `${svg.top}%`,

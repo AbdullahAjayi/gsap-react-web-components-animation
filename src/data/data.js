@@ -38,7 +38,9 @@ export const sections = [
 ];
 
 export const JetSvgs = [
-  { scale: 1, top: 10, left: 20, distance: 450 },
-  { scale: 1, top: 20, left: 30, distance: 300 },
-  { scale: 1.1, top: 15, left: 40, distance: 650 },
+  { scale: 0.3, top: 10, left: 10, distance: -450 },
+  { scale: 0.6, top: 30, left: 10, distance: 300 },
+  { scale: 0.5, top: 40, left: 10, distance: 650 },
+  { scale: 0.4, top: 60, left: 10, distance: 1000 },
+  { scale: 0.4, top: 80, left: 10, distance: -300 },
 ];
