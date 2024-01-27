@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import Jet2 from "../assets/svgs/Jet2.svg";
+import Jet1 from "../assets/svgs/Jet1.svg";
 import { sections, JetSvgs } from "../data/data";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -61,7 +61,7 @@ const GalleryWebsite = () => {
 
       jets.forEach((jet, i) => {
         gsap.to(jet, {
-          xPercent: jet.dataset.distance,
+          yPercent: jet.dataset.distance,
           scrollTrigger: {
             scrub: 0.3,
           },
@@ -104,23 +104,21 @@ const GalleryWebsite = () => {
           })}
         </div>
       </div>
-      {/* <div className="jet-container fixed top-0 left-0 w-[100%] h-screen"> */}
-      {/* {JetSvgs.map((svg, i) => (
+      {JetSvgs.map((svg, i) => (
         <img
           key={i}
-          src={Jet2}
+          src={Jet1}
           className={`jet w-12 fixed opacity-20`}
           style={{
             transform: `scale(${svg.scale})`,
             top: `${svg.top}%`,
             left: `${svg.left}%`,
           }}
-          alt=""
+          alt="jet svg"
           data-distance={svg.distance}
         />
-      ))} */}
+      ))}
     </div>
-    // </div>
   );
 };
 
