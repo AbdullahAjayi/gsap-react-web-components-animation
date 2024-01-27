@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,7 +21,7 @@ const GalleryWebsite = () => {
         scrollTrigger: {
           trigger: slider.current,
           pin: true,
-          scrub: 2,
+          scrub: 0,
           snap: 1 / (sections.length - 1),
           end: () => "+=" + slider.current.offsetWidth,
         },
@@ -84,9 +84,15 @@ const GalleryWebsite = () => {
           {sections.map((section, key) => {
             return (
               <section key={key} className="section w-[100%] h-screen">
-                <div className="inner relative w-full h-full">
-                  <img src={section.image} alt="" className="w-full h-full" />
-                  <div className="content absolute left-6 bottom-6 text-white w-1/3 bg-slate-500/60 p-3 rounded-lg">
+                <div className="inner relative flex flex-col justify-center min-[480px]:justify-normal sm:flex-none w-full h-full">
+                  <div>
+                    <img
+                      src={section.image}
+                      alt=""
+                      className="w-full sm:h-screen sm:object-cover"
+                    />
+                  </div>
+                  <div className="content h-1/3 overflow-y-auto sm:h-auto sm:absolute left-0 bottom-0 md:left-6 md:bottom-6 text-white md:w-1/2  md:bg-slate-500/60 p-3">
                     <h1 className="text-2xl mb-3 capitalize">
                       {section.header}
                     </h1>
@@ -99,7 +105,7 @@ const GalleryWebsite = () => {
         </div>
       </div>
       {/* <div className="jet-container fixed top-0 left-0 w-[100%] h-screen"> */}
-      {JetSvgs.map((svg, i) => (
+      {/* {JetSvgs.map((svg, i) => (
         <img
           key={i}
           src={Jet2}
@@ -112,7 +118,7 @@ const GalleryWebsite = () => {
           alt=""
           data-distance={svg.distance}
         />
-      ))}
+      ))} */}
     </div>
     // </div>
   );
