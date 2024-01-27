@@ -19,12 +19,20 @@ export const sections = [
     header: "drone pilot",
     text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
       sapiente at voluptatem rem nobis debitis porro! Voluptatem
+      aperiam aspernatur dolor.Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+      sapiente at voluptatem rem nobis debitis porro! Voluptatem
       aperiam aspernatur dolor.`,
   },
   {
     image: image_3,
     header: "final preparation",
     text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+      sapiente at voluptatem rem nobis debitis porro! Voluptatem
+      aperiam aspernatur dolor.Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+      sapiente at voluptatem rem nobis debitis porro! Voluptatem
+      aperiam aspernatur dolor.Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+      sapiente at voluptatem rem nobis debitis porro! Voluptatem
+      aperiam aspernatur dolor.Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
       sapiente at voluptatem rem nobis debitis porro! Voluptatem
       aperiam aspernatur dolor.`,
   },
